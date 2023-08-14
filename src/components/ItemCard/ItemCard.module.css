@@ -9,3 +9,23 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: #333;
 }
+
+.ItemCard div,
+svg {
+    background: none;
+}
+
+.FavoriteButton {
+    width: fit-content;
+    cursor: pointer;
+}
+
+.FavoriteButton:hover svg {
+    fill: crimson;
+    stroke: crimson;
+}
+
+.Active svg {
+    fill: red;
+    stroke: red;
+}

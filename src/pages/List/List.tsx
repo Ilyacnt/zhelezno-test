@@ -1,3 +1,4 @@
+import ItemCard from '../../components/ItemCard/ItemCard'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { fetchItemsThunk } from '../../store/items/itemsThunk'
 import { IItem } from '../../types/item'
@@ -15,7 +16,18 @@ const List = () => {
     return (
         <div className={styles.List}>
             {error && <div>{error}</div>}
-            {!loading ? items.map((item: IItem) => <div>{item.id}</div>) : <div>Loading...</div>}
+            {!loading ? (
+                items.map((item: IItem) => (
+                    <ItemCard
+                        key={item.id}
+                        id={item.id}
+                        title={item.title}
+                        thumbnailUrl={item.thumbnailUrl}
+                    />
+                ))
+            ) : (
+                <div>Loading...</div>
+            )}
         </div>
     )
 }
