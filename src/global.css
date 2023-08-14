@@ -1,5 +1,12 @@
+:root {
+    --background-global: #232323;
+    --text-color: #ffffff;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    color: var(--text-color);
+    background: var(--background-global);
 }
