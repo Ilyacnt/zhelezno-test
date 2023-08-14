@@ -3,7 +3,7 @@ import { IItem } from '../types/item'
 
 export const fetchItems = async (offset: number) => {
     try {
-        const limit = 10
+        const limit = 20
         const page = Math.ceil((offset + 1) / limit)
 
         const response = await axios.get<IItem[]>(
