@@ -8,10 +8,12 @@ const Layout = () => {
     return (
         <div className={styles.Layout}>
             <Header />
-            <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/list" element={<List />} />
-            </Routes>
+            <div className={styles.Content}>
+                <Routes>
+                    <Route path="/" element={<Dashboard />} />
+                    <Route path="/list" element={<List />} />
+                </Routes>
+            </div>
         </div>
     )
 }
