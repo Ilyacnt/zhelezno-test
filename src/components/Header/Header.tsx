@@ -7,8 +7,6 @@ const Header = () => {
             <div className={styles.Logo}>Test</div>
             <Link to="/">Dashboard</Link>
             <Link to="/list">List</Link>
-            {/* <a href="/">Dashboard</a>
-            <a href="/list">List</a> */}
         </div>
     )
 }

@@ -25,3 +25,6 @@ export const itemsSlice = createSlice({
     },
     extraReducers: {},
 })
+
+export const { addItemToFavorite, removeItemFromFavorite } = itemsSlice.actions
+export default itemsSlice.reducer
