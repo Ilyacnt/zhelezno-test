@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&display=swap');
+
 :root {
     --background-global: #232323;
     --text-color: #ffffff;
@@ -9,4 +11,5 @@
     box-sizing: border-box;
     color: var(--text-color);
     background: var(--background-global);
+    font-family: 'Rubik', sans-serif;
 }
