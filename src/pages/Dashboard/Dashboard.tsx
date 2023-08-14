@@ -10,12 +10,14 @@ const Dashboard = () => {
             <div>Number of favorite elements: {favoriteItems.length}</div>
             <div>Sum of images sizes: {0}</div>
             <div>Favorite items:</div>
-            {favoriteItems.map((item) => (
+            {favoriteItems.map((item, index) => (
                 <ItemCard
                     key={item.id}
                     id={item.id}
                     title={item.title}
                     thumbnailUrl={item.thumbnailUrl}
+                    draggable={true}
+                    index={index}
                 />
             ))}
         </div>

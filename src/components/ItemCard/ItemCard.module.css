@@ -29,3 +29,7 @@ svg {
     fill: red;
     stroke: red;
 }
+
+.Draggable {
+    cursor: grab;
+}

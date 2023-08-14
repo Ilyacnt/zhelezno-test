@@ -13,6 +13,7 @@
         "@types/react-dom": "^18.2.7",
         "axios": "^1.4.0",
         "classnames": "^2.3.2",
+        "lodash.debounce": "^4.0.8",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-redux": "^8.1.2",
@@ -51,5 +52,8 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "devDependencies": {
+        "@types/lodash.debounce": "^4.0.7"
     }
 }

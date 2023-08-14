@@ -5,12 +5,14 @@ import { fetchItemsThunk } from './itemsThunk'
 interface IItemsState {
     items: IItem[]
     favoriteItems: IItem[]
+    totalCount: number
     loading: boolean
     error: null | string
 }
 
 const initialState: IItemsState = {
     items: [],
+    totalCount: 0,
     favoriteItems: [],
     loading: false,
     error: null,
@@ -20,12 +22,23 @@ export const itemsSlice = createSlice({
     name: 'items',
     initialState,
     reducers: {
+        setTotalCount: (state, action: PayloadAction<number>) => {
+            state.totalCount = action.payload
+        },
         addItemToFavorite: (state, action: PayloadAction<number>) => {
             const findedItem = state.items.find((item) => item.id === action.payload)
             findedItem && state.favoriteItems.push(findedItem)
         },
         removeItemFromFavorite: (state, action: PayloadAction<number>) => {
             state.favoriteItems = state.favoriteItems.filter((item) => item.id !== action.payload)
+        },
+        reorderFavoriteItems: (
+            state,
+            action: PayloadAction<{ fromIndex: number; toIndex: number }>
+        ) => {
+            const { fromIndex, toIndex } = action.payload
+            const [movedItem] = state.favoriteItems.splice(fromIndex, 1)
+            state.favoriteItems.splice(toIndex, 0, movedItem)
         },
     },
     extraReducers: (builder) => {
@@ -43,5 +56,6 @@ export const itemsSlice = createSlice({
     },
 })
 
-export const { addItemToFavorite, removeItemFromFavorite } = itemsSlice.actions
+export const { setTotalCount, addItemToFavorite, removeItemFromFavorite, reorderFavoriteItems } =
+    itemsSlice.actions
 export default itemsSlice.reducer
