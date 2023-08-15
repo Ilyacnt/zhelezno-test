@@ -33,3 +33,8 @@ svg {
 .Draggable {
     cursor: grab;
 }
+
+.Image {
+    width: 150px;
+    height: 150px;
+}

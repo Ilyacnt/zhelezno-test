@@ -6,6 +6,7 @@ interface IItemsState {
     items: IItem[]
     favoriteItems: IItem[]
     totalCount: number
+    totalFileSizeOfImages: number
     loading: boolean
     error: null | string
 }
@@ -13,6 +14,7 @@ interface IItemsState {
 const initialState: IItemsState = {
     items: [],
     totalCount: 0,
+    totalFileSizeOfImages: 0,
     favoriteItems: [],
     loading: false,
     error: null,
@@ -24,6 +26,9 @@ export const itemsSlice = createSlice({
     reducers: {
         setTotalCount: (state, action: PayloadAction<number>) => {
             state.totalCount = action.payload
+        },
+        setTotalFileSizeOfImages: (state, action: PayloadAction<number>) => {
+            state.totalFileSizeOfImages = action.payload
         },
         addItemToFavorite: (state, action: PayloadAction<number>) => {
             const findedItem = state.items.find((item) => item.id === action.payload)

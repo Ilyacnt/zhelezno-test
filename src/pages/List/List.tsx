@@ -10,7 +10,7 @@ import { useEffect, useRef } from 'react'
 const List = () => {
     const dispatch = useAppDispatch()
     const { items, loading, error, totalCount } = useAppSelector((state) => state.items)
-    const offsetRef = useRef(0)
+    const offsetRef = useRef(10)
 
     useEffect(() => {
         const scrollHandler = debounce((event: Event) => {
@@ -21,7 +21,7 @@ const List = () => {
                 dataLength < totalCount &&
                 !loading
             ) {
-                offsetRef.current += 10
+                offsetRef.current += 20
                 dispatch(fetchItemsThunk(offsetRef.current))
             }
         }, 200)

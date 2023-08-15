@@ -75,7 +75,9 @@ const ItemCard = ({ id, thumbnailUrl, title, index, draggable = false }: ItemCar
                 </div>
             </div>
 
-            <img src={thumbnailUrl} alt={title} />
+            <div className={styles.Image}>
+                <img src={thumbnailUrl} alt={title} />
+            </div>
         </div>
     )
 }

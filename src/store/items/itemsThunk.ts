@@ -10,7 +10,7 @@ export const fetchItemsThunk = createAsyncThunk<IItem[], number>(
             const response = await fetchItems(offset)
             let totalCount: number | null = await response.headers['x-total-count']
             if (!totalCount) {
-                totalCount = 0
+                totalCount = 20
             }
             dispatch(setTotalCount(totalCount))
             return response.data

@@ -5,7 +5,7 @@ import { reorderFavoriteItems } from '../../store/items/itemsSlice'
 import styles from './Dashboard.module.css'
 
 const Dashboard = () => {
-    const { favoriteItems } = useAppSelector((state) => state.items)
+    const { favoriteItems, totalFileSizeOfImages } = useAppSelector((state) => state.items)
     const dispatch = useAppDispatch()
     const [draggedIndex, setDraggedIndex] = useState<number | null>(null)
 
@@ -22,7 +22,7 @@ const Dashboard = () => {
     return (
         <div className={styles.Dashboard}>
             <div>Number of favorite elements: {favoriteItems.length}</div>
-            <div>Sum of images sizes: {0}</div>
+            <div>Sum of images sizes: {totalFileSizeOfImages} bytes</div>
             <div>Favorite items:</div>
             <div
                 className={styles.DraggableArea}
