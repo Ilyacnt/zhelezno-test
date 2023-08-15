@@ -9,11 +9,23 @@ import {
     removeItemFromFavorite,
     reorderFavoriteItems,
 } from '../../store/items/itemsSlice'
-import { useRef } from 'react'
+import { DragEvent, useRef } from 'react'
+import { useDroppable } from '@dnd-kit/core'
+import { useDraggable } from '@dnd-kit/core'
+import { CSS } from '@dnd-kit/utilities'
 
 interface ItemCardProps extends Pick<IItem, 'id' | 'title' | 'thumbnailUrl'> {
+    onDragStart?: (event: DragEvent<HTMLDivElement>, index: number) => void
     index: number
     draggable?: boolean
+}
+
+function Droppable(props: any) {
+    const { setNodeRef } = useDroppable({
+        id: props.id,
+    })
+
+    return <div ref={setNodeRef}>{props.children}</div>
 }
 
 const ItemCard = ({ id, thumbnailUrl, title, index, draggable = false }: ItemCardProps) => {
@@ -21,7 +33,12 @@ const ItemCard = ({ id, thumbnailUrl, title, index, draggable = false }: ItemCar
     const favoriteItems = useAppSelector((state) => state.items.favoriteItems)
     const isItemInFavorites = favoriteItems.some((item) => item.id === id)
 
-    const dragRef = useRef<HTMLDivElement | null>(null)
+    const { attributes, listeners, setNodeRef, transform } = useDraggable({
+        id: 'unique-id',
+    })
+    const style = {
+        transform: CSS.Translate.toString(transform),
+    }
 
     const clickHandle = () => {
         if (!isItemInFavorites) {
@@ -31,37 +48,14 @@ const ItemCard = ({ id, thumbnailUrl, title, index, draggable = false }: ItemCar
         }
     }
 
-    const handleDragStart = (event: React.DragEvent<HTMLDivElement>) => {
-        dragRef.current = event.target as HTMLDivElement
-        event.dataTransfer?.setData('text/plain', '') // Needed for Firefox to enable dragging
-    }
-
-    const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-        event.preventDefault()
-    }
-
-    const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
-        event.preventDefault()
-        if (!dragRef.current) return
-
-        const fromIndex = dragRef.current.getAttribute('data-index')
-        const toIndex = index.toString() // Get the 'index' prop passed to the component
-
-        if (fromIndex && fromIndex !== toIndex) {
-            dispatch(
-                reorderFavoriteItems({ fromIndex: parseInt(fromIndex), toIndex: parseInt(toIndex) })
-            )
-        }
-    }
-
     return (
         <div
             className={cn(styles.ItemCard, { [styles.Draggable]: draggable })}
             draggable={draggable}
-            onDragStart={handleDragStart}
-            onDragOver={handleDragOver}
-            onDrop={handleDrop}
-            data-index={index}
+            ref={setNodeRef}
+            style={style}
+            {...listeners}
+            {...attributes}
         >
             <div>
                 <div>{`ID: ${id}, TITLE: ${title}`}</div>
